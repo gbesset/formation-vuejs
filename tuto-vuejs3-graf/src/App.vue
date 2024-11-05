@@ -4,7 +4,7 @@
 <form action="" @submit.prevent="addTodo">
   <fieldset role="group">
     <input type="text" v-model="newTodo" placeholder="Tâche à effectuer...">
-    <button :disabled="newTodo.length===0">Ajouter</button>
+    <Button :disabled="newTodo.length===0">Ajouter</Button>
   </fieldset>
 </form>
 <div v-if="todos.length ===0" >
@@ -14,8 +14,8 @@
   <ul>
     <li v-for="todo in sortTodos" :key="todo.date" :class="{completed:todo.completed}">
       <label>
-        <input type="checkbox" v-model="todo.completed">
-        {{todo.title}}
+        <!--<Checkbox :label="todo.title" @check="(p) => console.log('coché',p)" @uncheck="console.log('decoche')"/>-->
+          <Checkbox :label="todo.title" v-model="todo.completed"/>
       </label>
     </li>
   </ul>
@@ -26,13 +26,15 @@
   </label>
 </div>
 <p v-if="remaining>0">{{ remaining }} tâches à faire...</p>
-<Checkbox label="message"/>
+
 </template>
 
 
 <script setup>
 import { computed, ref } from 'vue';
 import Checkbox from './components/Checkbox.vue';
+import Button from './components/Button.vue';
+
 const todos = ref([
   {
   title:"tache 1",
