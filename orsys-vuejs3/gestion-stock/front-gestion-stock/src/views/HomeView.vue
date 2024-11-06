@@ -2,6 +2,16 @@
 
 <template>
   <main>
-    <h1>Gestion stock</h1>
+    <h1>Gérer efficacement votre stock !</h1>
+    <RouterLink to="/" class="button primary">Voir le stock</RouterLink>
   </main>
 </template>
+
+<style scoped>
+section {
+  padding: 5rem;
+}
+h1 {
+  text-align: center;
+}
+</style>

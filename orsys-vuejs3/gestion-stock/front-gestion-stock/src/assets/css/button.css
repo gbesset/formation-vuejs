@@ -1,0 +1,37 @@
+button,
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border: 0.1rem solid #eee;
+  font-size: 1rem;
+  text-decoration: inherit;
+  color: inherit;
+  background-color: #eee;
+  border-radius: 0.2rem;
+
+  cursor: pointer;
+
+  &:disabled {
+    color: #aaa;
+    cursor: not-allowed;
+  }
+  &:not(:disabled) {
+    &:hover {
+      background: #ddd;
+      border-color: #dddd;
+    }
+  }
+
+  &.primary {
+    background: #333;
+    border-color: #333;
+    color: aliceblue;
+
+    &:hover {
+      background: #444;
+      border-color: #444;
+    }
+  }
+}
