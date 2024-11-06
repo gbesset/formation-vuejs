@@ -19,4 +19,11 @@ main {
   flex-flow: column;
   align-items: center;
   gap: 0.5rem;
+
+  p {
+    width: 100%;
+    max-width: 100ch;
+    margin: 0 auto;
+    text-align: left;
+  }
 }
