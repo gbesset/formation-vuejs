@@ -14,4 +14,7 @@ section {
 h1 {
   text-align: center;
 }
+main {
+  flex-grow: 0;
+}
 </style>
