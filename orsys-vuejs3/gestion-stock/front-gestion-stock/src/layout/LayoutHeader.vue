@@ -1,6 +1,6 @@
 <template>
   <header>
-    <a href="/"><img src="/cart.svg" alt="Logo" /><span>Gestion Stock</span></a>
+    <RouterLink to="/"><img src="/cart.svg" alt="Logo" /><span>Gestion Stock</span></RouterLink>
   </header>
 </template>
 
