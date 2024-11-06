@@ -1,9 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import LayoutBody from './layout/LayoutBody.vue'
+import LayoutFooter from './layout/LayoutFooter.vue'
+import LayoutHeader from './layout/LayoutHeader.vue'
+</script>
 
 <template>
-  <main class="container">
-    <h1>Gestion stock</h1>
-  </main>
+  <LayoutHeader />
+  <LayoutBody />
+  <LayoutFooter />
 </template>
 
 <style scoped></style>
