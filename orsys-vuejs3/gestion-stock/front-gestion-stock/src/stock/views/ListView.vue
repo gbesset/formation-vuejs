@@ -1,20 +1,25 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faAdd, faRotateRight, faTrashCan } from '@fortawesome/free-solid-svg-icons'
+</script>
 
 <template>
   <main>
     <h1>Liste des articles</h1>
     <section class="content">
       <nav>
-        <button>Refresh</button>
-        <RouterLink to="/stock/add" class="button">add</RouterLink>
-        <button>delete</button>
+        <button title="Refresh"><FontAwesomeIcon :icon="faRotateRight" /></button>
+        <RouterLink to="/stock/add" class="button" title="Add">
+          <FontAwesomeIcon :icon="faAdd"
+        /></RouterLink>
+        <button title="delete"><FontAwesomeIcon :icon="faTrashCan" /></button>
       </nav>
       <div class="error">Erreur</div>
       <table>
         <thead>
           <tr>
-            <th class="name">Name</th>
-            <th class="price">price</th>
+            <th class="name">Nom</th>
+            <th class="price">Prix</th>
             <th class="qty">Qty</th>
           </tr>
         </thead>
