@@ -1,8 +1,20 @@
 <script setup lang="ts">
 import { faAdd, faRotateRight, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { useArticleStore } from '../stores/article.store'
+import type { Article } from '../interfaces/Article'
+import { ref } from 'vue'
 
 const articleStore = useArticleStore()
+
+const handeSelectArticle = (id: Article['id']) => {
+  console.log('id: ', id)
+  if (selectedArticleIds.value.has(id)) {
+    selectedArticleIds.value.delete(id)
+    return
+  }
+  selectedArticleIds.value.add(id)
+}
+const selectedArticleIds = ref(new Set<Article['id']>())
 </script>
 
 <template>
@@ -26,7 +38,12 @@ const articleStore = useArticleStore()
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(article, index) in articleStore.articles" :key="article.id">
+          <tr
+            v-for="(article, index) in articleStore.articles"
+            :key="article.id"
+            @click="handeSelectArticle(article.id)"
+            :class="{ selected: selectedArticleIds.has(article.id) }"
+          >
             <td hidden>{{ index }}</td>
             <td class="name">{{ article.name }}</td>
             <td class="price">{{ article.price }} k</td>
