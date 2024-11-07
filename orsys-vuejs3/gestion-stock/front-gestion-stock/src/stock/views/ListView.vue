@@ -3,8 +3,12 @@ import { faAdd, faRotateRight, faTrashCan } from '@fortawesome/free-solid-svg-ic
 import { useArticleStore } from '../stores/article.store'
 import type { Article } from '../interfaces/Article'
 import { ref } from 'vue'
+//import { storeToRefs } from 'pinia'
 
 const articleStore = useArticleStore()
+
+// Sinon on récupère une snaphsot du store et ce n'est pas réactif
+//const {articles} = storeToRefs(articleStore)
 
 const handeSelectArticle = (id: Article['id']) => {
   console.log('id: ', id)
@@ -14,6 +18,11 @@ const handeSelectArticle = (id: Article['id']) => {
   }
   selectedArticleIds.value.add(id)
 }
+const handleDelete = async () => {
+  await articleStore.remove(selectedArticleIds.value)
+  selectedArticleIds.value.clear()
+}
+
 const selectedArticleIds = ref(new Set<Article['id']>())
 </script>
 
@@ -26,7 +35,7 @@ const selectedArticleIds = ref(new Set<Article['id']>())
         <RouterLink to="/stock/add" class="button" title="Add">
           <FaIcon :icon="faAdd"
         /></RouterLink>
-        <button title="delete" v-show="selectedArticleIds.size > 0">
+        <button title="delete" v-show="selectedArticleIds.size > 0" @click="handleDelete">
           <FaIcon :icon="faTrashCan" />
         </button>
       </nav>

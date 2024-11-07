@@ -31,6 +31,9 @@ export const useArticleStore = defineStore('articles', () => {
   const addArticle = async (article: NewArticle) => {
     articles.value.push({ id: window.crypto.randomUUID(), ...article })
   }
+  const remove = async (selectedIds: Set<Article['id']>) => {
+    articles.value = articles.value.filter((a) => !selectedIds.has(a.id))
+  }
 
-  return { articles, totalArticles, addArticle, refresh }
+  return { articles, totalArticles, addArticle, refresh, remove }
 })
