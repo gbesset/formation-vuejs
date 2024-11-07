@@ -26,7 +26,9 @@ const selectedArticleIds = ref(new Set<Article['id']>())
         <RouterLink to="/stock/add" class="button" title="Add">
           <FaIcon :icon="faAdd"
         /></RouterLink>
-        <button title="delete"><FaIcon :icon="faTrashCan" /></button>
+        <button title="delete" v-show="selectedArticleIds.size > 0">
+          <FaIcon :icon="faTrashCan" />
+        </button>
       </nav>
       <div class="error">Erreur</div>
       <table>
