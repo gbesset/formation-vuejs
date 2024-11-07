@@ -41,10 +41,13 @@ onMounted(async () => {
     <h1>Liste des articles</h1>
     <section class="content">
       <nav>
+        <AsyncBtn :icon="faRotateRight" :action="handleRefresh"
+          ><RouterLink to="/stock/add" class="button" title="Add">
+            <FaIcon :icon="faAdd" /></RouterLink
+        ></AsyncBtn>
+
         <button title="Refresh"><FaIcon :icon="faRotateRight" @click="handleRefresh" /></button>
-        <RouterLink to="/stock/add" class="button" title="Add">
-          <FaIcon :icon="faAdd"
-        /></RouterLink>
+
         <button title="delete" v-show="selectedArticleIds.size > 0" @click="handleDelete">
           <FaIcon :icon="faTrashCan" />
         </button>

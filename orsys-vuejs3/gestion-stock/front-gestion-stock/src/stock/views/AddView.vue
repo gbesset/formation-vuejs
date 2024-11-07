@@ -14,10 +14,16 @@ const article = ref<NewArticle>({
   price: 0,
   qty: 0,
 })
-
+const errorMsg = ref('')
 const handleSubmit = async () => {
+  if (article.value.name === 'test') throw new Error()
+
   await articleStore.addArticle(article.value)
   await router.push('/stock')
+}
+
+const handleError = (msg: string) => {
+  errorMsg.value = msg
 }
 </script>
 
@@ -43,9 +49,11 @@ const handleSubmit = async () => {
         <span class="error"></span>
       </label>
 
-      <div class="error"></div>
+      <div class="error">{{ errorMsg }}</div>
 
-      <AsyncBtn :icon="faAdd" :action="handleSubmit" class="primary">Ajouter</AsyncBtn>
+      <AsyncBtn :icon="faAdd" :action="handleSubmit" class="primary" @error="handleError"
+        >Ajouter</AsyncBtn
+      >
     </form>
   </main>
 </template>
@@ -66,8 +74,9 @@ form {
   }
 }
 
-span.error {
+div.error {
   height: 1em;
+  color: red;
 }
 div.error {
   height: 3em;
