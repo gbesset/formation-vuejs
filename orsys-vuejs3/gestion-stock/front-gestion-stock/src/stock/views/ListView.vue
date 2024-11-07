@@ -1,37 +1,12 @@
 <script setup lang="ts">
 import { faAdd, faRotateRight, faTrashCan } from '@fortawesome/free-solid-svg-icons'
-import type { Article } from '../interfaces/Article'
-import { ref } from 'vue'
+import { useArticleStore } from '../stores/article.store'
 
-const articles = ref<Article[]>([
-  {
-    id: 'a1',
-    name: 'BTC',
-    price: 72054.23,
-    qty: 1,
-  },
-  {
-    id: 'a8',
-    name: 'ETH',
-    price: 5245.32,
-    qty: 2,
-  },
-  {
-    id: 'a4',
-    name: 'TAO',
-    price: 997.25,
-    qty: 3,
-  },
-])
+const articleStore = useArticleStore()
 
 setTimeout(() => {
-  articles.value.push({
-    id: 'a5',
-    name: 'CKB',
-    price: 4055,
-    qty: 452265,
-  })
-}, 2_000)
+  articleStore.addArticle({ name: 'ee', price: 2, qty: 3 })
+}, 2000)
 </script>
 
 <template>
@@ -55,7 +30,7 @@ setTimeout(() => {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(article, index) in articles" :key="article.id">
+          <tr v-for="(article, index) in articleStore.articles" :key="article.id">
             <td hidden>{{ index }}</td>
             <td class="name">{{ article.name }}</td>
             <td class="price">{{ article.price }} k</td>
