@@ -23,6 +23,10 @@ const handleDelete = async () => {
   selectedArticleIds.value.clear()
 }
 
+const handleRefresh = async () => {
+  await articleStore.refresh()
+}
+
 const selectedArticleIds = ref(new Set<Article['id']>())
 </script>
 
@@ -31,7 +35,7 @@ const selectedArticleIds = ref(new Set<Article['id']>())
     <h1>Liste des articles</h1>
     <section class="content">
       <nav>
-        <button title="Refresh"><FaIcon :icon="faRotateRight" /></button>
+        <button title="Refresh"><FaIcon :icon="faRotateRight" @click="handleRefresh" /></button>
         <RouterLink to="/stock/add" class="button" title="Add">
           <FaIcon :icon="faAdd"
         /></RouterLink>
@@ -57,7 +61,7 @@ const selectedArticleIds = ref(new Set<Article['id']>())
           >
             <td hidden>{{ index }}</td>
             <td class="name">{{ article.name }}</td>
-            <td class="price">{{ article.price }} k</td>
+            <td class="price">{{ article.price }}</td>
             <td class="qty">{{ article.qty }}</td>
           </tr>
         </tbody>

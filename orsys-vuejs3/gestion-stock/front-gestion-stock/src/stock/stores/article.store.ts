@@ -1,38 +1,24 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import type { Article, NewArticle } from '../interfaces/Article'
+import { api } from '../services/article.api'
 
 export const useArticleStore = defineStore('articles', () => {
-  const articles = ref<Article[]>([
-    {
-      id: 'a1',
-      name: 'BTC',
-      price: 72054.23,
-      qty: 1,
-    },
-    {
-      id: 'a8',
-      name: 'ETH',
-      price: 5245.32,
-      qty: 2,
-    },
-    {
-      id: 'a4',
-      name: 'TAO',
-      price: 997.25,
-      qty: 3,
-    },
-  ])
+  const articles = ref<Article[]>([])
 
   const totalArticles = computed(() => articles.value.length)
 
-  const refresh = async () => {}
+  const refresh = async () => {
+    articles.value = await api.retrieveAll()
+  }
 
   const addArticle = async (article: NewArticle) => {
-    articles.value.push({ id: window.crypto.randomUUID(), ...article })
+    await api.add(article)
+    await refresh()
   }
   const remove = async (selectedIds: Set<Article['id']>) => {
-    articles.value = articles.value.filter((a) => !selectedIds.has(a.id))
+    await api.remove([...selectedIds])
+    await refresh()
   }
 
   return { articles, totalArticles, addArticle, refresh, remove }
