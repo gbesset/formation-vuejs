@@ -1,5 +1,27 @@
 <script setup lang="ts">
 import { faAdd, faRotateRight, faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import type { Article } from '../interfaces/Article'
+
+const articles: Article[] = [
+  {
+    id: 'a1',
+    name: 'BTC',
+    price: 72054.23,
+    qty: 1,
+  },
+  {
+    id: 'a8',
+    name: 'ETH',
+    price: 5245.32,
+    qty: 2,
+  },
+  {
+    id: 'a4',
+    name: 'TAO',
+    price: 997.25,
+    qty: 3,
+  },
+]
 </script>
 
 <template>
@@ -23,20 +45,11 @@ import { faAdd, faRotateRight, faTrashCan } from '@fortawesome/free-solid-svg-ic
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="name">BTC</td>
-            <td class="price">72k</td>
-            <td class="qty">1</td>
-          </tr>
-          <tr>
-            <td class="name">ETH</td>
-            <td class="price">5k</td>
-            <td class="qty">2</td>
-          </tr>
-          <tr>
-            <td class="name">TAO</td>
-            <td class="price">1k</td>
-            <td class="qty">3</td>
+          <tr v-for="(article, index) in articles" :key="article.id">
+            <td hidden>{{ index }}</td>
+            <td class="name">{{ article.name }}</td>
+            <td class="price">{{ article.price }} k</td>
+            <td class="qty">{{ article.qty }}</td>
           </tr>
         </tbody>
       </table>
