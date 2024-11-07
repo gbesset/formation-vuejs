@@ -28,7 +28,7 @@ export const useArticleStore = defineStore('articles', () => {
 
   const refresh = async () => {}
 
-  const addArticle = (article: NewArticle) => {
+  const addArticle = async (article: NewArticle) => {
     articles.value.push({ id: window.crypto.randomUUID(), ...article })
   }
 

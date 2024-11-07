@@ -3,10 +3,6 @@ import { faAdd, faRotateRight, faTrashCan } from '@fortawesome/free-solid-svg-ic
 import { useArticleStore } from '../stores/article.store'
 
 const articleStore = useArticleStore()
-
-setTimeout(() => {
-  articleStore.addArticle({ name: 'ee', price: 2, qty: 3 })
-}, 2000)
 </script>
 
 <template>

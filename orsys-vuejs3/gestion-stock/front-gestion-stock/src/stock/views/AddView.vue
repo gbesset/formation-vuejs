@@ -1,26 +1,44 @@
 <script setup lang="ts">
 import { faAdd } from '@fortawesome/free-solid-svg-icons'
+import { ref } from 'vue'
+import type { NewArticle } from '../interfaces/Article'
+import { useArticleStore } from '../stores/article.store'
+import { useRouter } from 'vue-router'
+
+const articleStore = useArticleStore()
+const router = useRouter()
+
+const article = ref<NewArticle>({
+  name: '',
+  price: 0,
+  qty: 0,
+})
+
+const handleSubmit = async () => {
+  await articleStore.addArticle(article.value)
+  await router.push('/stock')
+}
 </script>
 
 <template>
   <main>
     <h1>Ajout d'un article</h1>
-    <form>
+    <form v-on:submit.prevent="handleSubmit">
       <label>
         <span>Nom</span>
-        <input type="text" />
+        <input type="text" v-model="article.name" />
         <span class="error"></span>
       </label>
 
       <label>
         <span>Prix</span>
-        <input type="number" />
+        <input type="number" v-model="article.price" />
         <span class="error"></span>
       </label>
 
       <label>
         <span>Quantité</span>
-        <input type="number" />
+        <input type="number" v-model="article.qty" />
         <span class="error"></span>
       </label>
 
