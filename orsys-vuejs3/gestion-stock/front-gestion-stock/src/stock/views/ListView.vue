@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { faAdd, faRotateRight, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import type { Article } from '../interfaces/Article'
+import { ref } from 'vue'
 
-const articles: Article[] = [
+const articles = ref<Article[]>([
   {
     id: 'a1',
     name: 'BTC',
@@ -21,7 +22,16 @@ const articles: Article[] = [
     price: 997.25,
     qty: 3,
   },
-]
+])
+
+setTimeout(() => {
+  articles.value.push({
+    id: 'a5',
+    name: 'CKB',
+    price: 4055,
+    qty: 452265,
+  })
+}, 2_000)
 </script>
 
 <template>
