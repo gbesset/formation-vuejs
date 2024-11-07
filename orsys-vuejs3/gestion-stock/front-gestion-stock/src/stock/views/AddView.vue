@@ -4,6 +4,7 @@ import { ref } from 'vue'
 import type { NewArticle } from '../interfaces/Article'
 import { useArticleStore } from '../stores/article.store'
 import { useRouter } from 'vue-router'
+import AsyncBtn from '@/widgets/AsyncBtn.vue'
 
 const articleStore = useArticleStore()
 const router = useRouter()
@@ -23,7 +24,7 @@ const handleSubmit = async () => {
 <template>
   <main>
     <h1>Ajout d'un article</h1>
-    <form v-on:submit.prevent="handleSubmit">
+    <form>
       <label>
         <span>Nom</span>
         <input type="text" v-model="article.name" />
@@ -43,7 +44,8 @@ const handleSubmit = async () => {
       </label>
 
       <div class="error"></div>
-      <button class="primary"><FaIcon :icon="faAdd" /><span>Ajouter</span></button>
+
+      <AsyncBtn :icon="faAdd" :action="handleSubmit" class="primary">Ajouter</AsyncBtn>
     </form>
   </main>
 </template>

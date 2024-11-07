@@ -2,7 +2,7 @@
 import { faAdd, faRotateRight, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { useArticleStore } from '../stores/article.store'
 import type { Article } from '../interfaces/Article'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 //import { storeToRefs } from 'pinia'
 
 const articleStore = useArticleStore()
@@ -28,6 +28,12 @@ const handleRefresh = async () => {
 }
 
 const selectedArticleIds = ref(new Set<Article['id']>())
+
+onMounted(async () => {
+  if (articleStore.articles.length === 0) {
+    articleStore.refresh()
+  }
+})
 </script>
 
 <template>
