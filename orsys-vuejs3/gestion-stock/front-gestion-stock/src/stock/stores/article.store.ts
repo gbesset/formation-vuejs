@@ -2,6 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import type { Article, NewArticle } from '../interfaces/Article'
 import { api } from '../services/article.api'
+import { readonly } from 'vue'
 
 export const useArticleStore = defineStore('articles', () => {
   const articles = ref<Article[]>([])
@@ -21,5 +22,5 @@ export const useArticleStore = defineStore('articles', () => {
     await refresh()
   }
 
-  return { articles, totalArticles, addArticle, refresh, remove }
+  return { articles: readonly(articles), totalArticles, addArticle, refresh, remove }
 })
