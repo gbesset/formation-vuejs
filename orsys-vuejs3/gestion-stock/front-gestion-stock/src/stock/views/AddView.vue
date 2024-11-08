@@ -5,15 +5,17 @@ import type { NewArticle } from '../interfaces/Article'
 import { useArticleStore } from '../stores/article.store'
 import { useRouter } from 'vue-router'
 import AsyncBtn from '@/widgets/AsyncBtn.vue'
+import { vFocus } from '@/widgets/focus.directive'
 
 const articleStore = useArticleStore()
 const router = useRouter()
 
 const article = ref<NewArticle>({
-  name: '',
+  name: 'your name',
   price: 0,
   qty: 0,
 })
+
 const errorMsg = ref('')
 const handleSubmit = async () => {
   if (article.value.name === 'test') throw new Error()
@@ -33,13 +35,13 @@ const handleError = (msg: string) => {
     <form>
       <label>
         <span>Nom</span>
-        <input type="text" v-model="article.name" />
+        <input type="text" v-model="article.name" v-focus="'focus'" />
         <span class="error"></span>
       </label>
 
       <label>
         <span>Prix</span>
-        <input type="number" v-model="article.price" />
+        <input type="number" v-model="article.price" v-focus="''" />
         <span class="error"></span>
       </label>
 
