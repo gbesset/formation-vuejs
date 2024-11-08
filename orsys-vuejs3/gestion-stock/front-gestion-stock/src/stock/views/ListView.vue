@@ -63,15 +63,12 @@ onMounted(async () => {
         </thead>
         <tbody>
           <tr
-            v-for="(article, index) in articleStore.articles"
+            v-for="article in articleStore.articles"
             :key="article.id"
             @click="handeSelectArticle(article.id)"
             :class="{ selected: selectedArticleIds.has(article.id) }"
           >
-            <td hidden>{{ index }}</td>
-            <td class="name">{{ article.name }}</td>
-            <td class="price">{{ article.price }}</td>
-            <td class="qty">{{ article.qty }}</td>
+            <ArticleCells :article="article" />
           </tr>
         </tbody>
       </table>
