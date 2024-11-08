@@ -3,6 +3,7 @@ import { faAdd, faRotateRight, faTrashCan } from '@fortawesome/free-solid-svg-ic
 import { useArticleStore } from '../stores/article.store'
 import type { Article } from '../interfaces/Article'
 import { onMounted, ref } from 'vue'
+import ArticleCells from '../interfaces/ArticleCells.vue'
 //import { storeToRefs } from 'pinia'
 
 const articleStore = useArticleStore()
@@ -62,13 +63,17 @@ onMounted(async () => {
           </tr>
         </thead>
         <tbody>
+          <tr class="loading" v-if="articleStore.articles === undefined">
+            <td colspan="3"><FaIcon icon="" />Loading</td>
+          </tr>
           <tr
-            v-for="article in articleStore.articles"
+            v-else
+            v-for="(article, index) in articleStore.articles"
             :key="article.id"
             @click="handeSelectArticle(article.id)"
             :class="{ selected: selectedArticleIds.has(article.id) }"
           >
-            <ArticleCells :article="article" />
+            <ArticleCells :article="articleStore.articles[index]" />
           </tr>
         </tbody>
       </table>
